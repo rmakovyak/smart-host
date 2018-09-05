@@ -2,8 +2,8 @@ import {
   generateCustomers,
   settleCustomers,
   calculateRoomUsage
-} from './roomUsage';
-import { settledCustomers, payments } from './roomUsageTestFixtures';
+} from './RoomUsage.helper';
+import { settledCustomers, payments } from './testFixtures';
 
 describe('roomUsage', () => {
   describe('generateCustomers', () => {

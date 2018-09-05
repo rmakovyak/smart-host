@@ -24,7 +24,8 @@ export function calculateRoomUsage(settledCustomers) {
   };
 }
 
-export function settleCustomers(customers, rooms) {
+export function settleCustomers(customer, rooms) {
+  const customers = customer.map(el => el);
   let premiumLimit = 100;
 
   const economyCustomersForecast = customers.filter(
