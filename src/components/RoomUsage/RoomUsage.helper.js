@@ -44,6 +44,7 @@ export function settleCustomers(customer, rooms) {
 
   if (upgradePossible) {
     upgradeCapacity = economyCustomersForecast - rooms.economy;
+    console.log(upgradeCapacity);
   }
 
   /**
@@ -62,9 +63,14 @@ export function settleCustomers(customer, rooms) {
     /**
      * Upgrade economy user if there is upgradeCapacity
      */
-    if (customers[i].payment < premiumLimit && upgradeCapacity > 0) {
+    if (
+      customers[i].payment < premiumLimit &&
+      upgradeCapacity > 0 &&
+      occupiedPremium < rooms.premium
+    ) {
       customers[i].room = 'premium';
       customers[i].upgraded = true;
+      occupiedPremium = occupiedPremium + 1;
       upgradeCapacity = upgradeCapacity - 1;
       continue;
     }
