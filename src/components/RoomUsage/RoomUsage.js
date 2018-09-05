@@ -5,25 +5,28 @@ import {
   calculateRoomUsage
 } from './RoomUsage.helper';
 
+const initState = {
+  premium: {
+    total: 0,
+    value: 0
+  },
+  economy: {
+    total: 0,
+    value: 0
+  },
+  economyCount: 0,
+  premiumCount: 0
+};
+
 class RoomUsage extends Component {
   constructor(props) {
     super(props);
 
-    this.state = {
-      premium: {
-        total: 0,
-        value: 0
-      },
-      economy: {
-        total: 0,
-        value: 0
-      },
-      economyCount: 0,
-      premiumCount: 0
-    };
+    this.state = initState;
 
     this.handleCountChange = this.handleCountChange.bind(this);
     this.calculateRoomUsage = this.calculateRoomUsage.bind(this);
+    this.handleReset = this.handleReset.bind(this);
   }
 
   componentDidMount() {
@@ -56,28 +59,59 @@ class RoomUsage extends Component {
     });
   }
 
+  handleReset(e) {
+    e.preventDefault();
+    this.setState({ ...initState });
+  }
+
   render() {
     return (
-      <div className="App">
-        <form>
-          <input
-            placeholder="Premium rooms count"
-            type="number"
-            name="premiumCount"
-            value={this.state.premiumCount}
-            onChange={this.handleCountChange}
-          />
-          <input
-            placeholder="Economy rooms count"
-            type="number"
-            name="economyCount"
-            value={this.state.economyCount}
-            onChange={this.handleCountChange}
-          />
-          <button onClick={this.calculateRoomUsage}>
-            Calculate room usage
-          </button>
+      <div className="RoomUsage">
+        <h1 className="title">Room usage calculator</h1>
+        <form style={{ marginBottom: '20px' }}>
+          <div className="field">
+            <label className="label">Premium rooms count</label>
+            <div className="control">
+              <input
+                placeholder="Premium rooms count"
+                class="input"
+                type="number"
+                name="premiumCount"
+                value={this.state.premiumCount}
+                onChange={this.handleCountChange}
+              />
+            </div>
+          </div>
+          <div className="field">
+            <label className="label">Economy rooms count</label>
+            <div className="control">
+              <input
+                placeholder="Economy rooms count"
+                class="input"
+                type="number"
+                name="economyCount"
+                value={this.state.economyCount}
+                onChange={this.handleCountChange}
+              />
+            </div>
+          </div>
+          <div className="field is-grouped">
+            <div className="control">
+              <button
+                className="button is-link"
+                onClick={this.calculateRoomUsage}
+              >
+                Calculate room usage
+              </button>
+            </div>
+            <div className="control">
+              <button className="button is-text" onClick={this.handleReset}>
+                Reset
+              </button>
+            </div>
+          </div>
         </form>
+        <h1 className="subtitle">Report</h1>
         <p>
           Usage premium: {this.state.premium.total} (€{' '}
           {this.state.premium.value})
