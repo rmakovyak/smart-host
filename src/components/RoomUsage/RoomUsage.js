@@ -74,7 +74,7 @@ class RoomUsage extends Component {
             <div className="control">
               <input
                 placeholder="Premium rooms count"
-                class="input"
+                className="input"
                 type="number"
                 name="premiumCount"
                 value={this.state.premiumCount}
@@ -87,7 +87,7 @@ class RoomUsage extends Component {
             <div className="control">
               <input
                 placeholder="Economy rooms count"
-                class="input"
+                className="input"
                 type="number"
                 name="economyCount"
                 value={this.state.economyCount}
